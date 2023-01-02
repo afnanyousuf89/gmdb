@@ -1,9 +1,13 @@
 package com.galvanize.gmdb.gmdb;
 
+import java.util.ArrayList;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Movies {
@@ -15,6 +19,13 @@ public class Movies {
     private int movieYear;
     private String movieGenre;
     private String movieRuntime;
+    @OneToMany(
+        mappedBy = "movies",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<Reviews> reviews = new ArrayList<>();
+
 
     protected Movies(){}
 
